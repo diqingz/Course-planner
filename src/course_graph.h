@@ -32,4 +32,4 @@ class Courses {
 //helper function to read file to vector
 map<string, vector<map<vector<string>,bool>>> readCourseFile(string filename);
 
-vector<string,double> readGPAFile(string filename);
+map<string,double> readGPAFile(string filename);
