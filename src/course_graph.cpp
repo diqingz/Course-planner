@@ -16,16 +16,16 @@ Courses::Courses(string course_file, string gpa_file) {
         nodes_.push_back(Node(name, gpa, course.second));
     }
     for (Node node : nodes_) {
-     for (map<vector<string>, bool> prereq_map : node.pre_) {
-         for (vector<string> prereq_course : prereq_map) {
-             prereq_map.second = false;
-             for (string course_name : prereq_course.first) {
-                 edges_[node.name_].push_back(course_name);
-                 weights_[make_pair(course_name, node.name_)] = gpa_data[course_name];
+        for (map<vector<string>, bool> prereq_map : node.pre_) {
+            for (vector<string> prereq_course : prereq_map) {
+                prereq_map.second = false;
+                for (string course_name : prereq_course.first) {
+                    edges_[node.name_].push_back(course_name);
+                    weights_[make_pair(course_name, node.name_)] = gpa_data[course_name];
                 }
-         }
-     }
- }
+            }
+        }
+    }
 }
 
 
