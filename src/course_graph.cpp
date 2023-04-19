@@ -3,6 +3,33 @@
 #include <fstream>
 #include <sstream>
 
+
+Courses::Courses(string course_file, string gpa_file) {
+    // Read course file
+    auto course_data = readCourseFile(course_file);/*map<string, vector<map<vector<string>, bool>>> */
+    // Read GPA file
+    auto gpa_data = readGPAFile(gpa_file);
+    // Create nodes
+    for (auto& course : course_data) {/*course type=vector<map<vector<string>, bool>>*/
+        string name = course.first;
+        double gpa = gpa_data[name];
+        nodes_.push_back(Node(name, gpa, course.second));
+    }
+    for (Node node : nodes_) {
+     for (map<vector<string>, bool> prereq_map : node.pre_) {
+         for (vector<string> prereq_course : prereq_map) {
+             prereq_map.second = false;
+             for (string course_name : prereq_course.first) {
+                 edges_[node.name_].push_back(course_name);
+                 weights_[make_pair(course_name, node.name_)] = gpa_data[course_name];
+                }
+         }
+     }
+ }
+}
+
+
+
 map<string, vector<map<vector<string>,bool>>> readCourseFile(string filename) {
     std::ifstream csv_file(filename);
     std::string line;
@@ -62,3 +89,5 @@ map<string,double> readGPAFile(string filename) {
     }
 
 }
+
+
