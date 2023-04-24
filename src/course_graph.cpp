@@ -60,7 +60,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
 
                     string sub = first.substr(i, (semi != -1) ? semi : per);
                     if (!helper(sub, i).empty())
-                        prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), false));
+                        prereq.insert(pair<vector<string>,bool>(helper(sub, i), false));
                 }
 
                 //check for oneof
@@ -80,7 +80,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                         }
                         oneof++;
                     }
-                    prereq.push_back(make_pair<vector<string>,bool>(of, false));
+                    prereq.insert(pair<vector<string>,bool>(of, false));
                     
                 }
                 //check for concurrent
@@ -88,7 +88,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                     string concurrent = des.substr(ccurr_low, des[des.length() - 1]);
                     size_t idx = ccurr_low;
                     if (!helper(concurrent, idx).empty())
-                        prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), true));
+                        prereq.insert(pair<vector<string>,bool>(helper(concurrent, idx), true));
                 }
                 if (ccurr_up != string::npos) {
                     size_t semi = concurrent.find(";");
@@ -96,10 +96,10 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                     size_t idx = ccurr_up;
                     string concurrent = des.substr(ccurr_up, (semi != -1) ? semi : per);
                     if (!helper(concurrent, idx).empty())
-                        prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), true));
+                        prereq.insert(pair<vector<string>,bool>(helper(concurrent, idx), true));
                 }
             }
-            out.push_back(make_pair<string, map<vector<string>,bool>>(name, prereq));
+            out.insert(pair<string, map<vector<string>,bool>>(name, prereq));
         }
     }
 
