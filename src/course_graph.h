@@ -33,6 +33,8 @@ class Courses {
 //helper function to read file
 map<string, map<vector<string>,bool>> readCourseFile(string filename);
 
+std::vector<std::string> GetSubstrs(const std::string& str, char delimiter);
+
 size_t compare(size_t a, size_t b);
 
 vector<string> helper(string input, size_t& idx);
