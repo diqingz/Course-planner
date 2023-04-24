@@ -31,10 +31,10 @@ Courses::Courses(string course_file, string gpa_file) {
 
 
 map<string, map<vector<string>,bool>> readCourseFile(string filename) {
-    std::ifstream csv_file(filename);
+    std::ifstream ifs(filename);
     std::string line;
     // skip the header line
-    std::getline(csv_file, line);
+    std::getline(ifs, line);
     map<string, map<vector<string>,bool>> out;
 
     for (std::string line; std::getline(ifs, line); line = "") {
@@ -159,10 +159,10 @@ vector<string> helper(string input, size_t& idx) {
 
 
 map<string,double> readGPAFile(string filename) {
-    std::ifstream csv_file(filename);
+    std::ifstream ifs(filename);
     std::string line;
     // skip the header line
-    std::getline(csv_file, line);
+    std::getline(ifs, line);
 
     vector<string,double> out;
     for (std::string line; std::getline(ifs, line); line = "") {
