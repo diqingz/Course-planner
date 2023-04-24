@@ -54,11 +54,11 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
 
 
                 while ((oneof > i && tmp > i) || (oneof == string::npos && tmp == string::npos)) {
-                    string first = des.GetSubstrs(i, (oneof < tmp) ? oneof : tmp);
+                    string first = des.substr(i, (oneof < tmp) ? oneof : tmp);
                     size_t semi = first.find(";");
                     size_t per = first.find(".");
 
-                    string sub = first.GetSubstrs(i, (semi != -1) ? semi : per);
+                    string sub = first.substr(i, (semi != -1) ? semi : per);
                     if (!helper(sub, i).empty())
                         prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), false));
                 }
@@ -85,7 +85,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                 }
                 //check for concurrent
                 if (ccurr_low != string::npos) {
-                    string concurrent = des.GetSubstrs(ccurr_low, des[des.length() - 1]);
+                    string concurrent = des.substr(ccurr_low, des[des.length() - 1]);
                     size_t idx = ccurr_low;
                     if (!helper(concurrent, idx).empty())
                         prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), true));
@@ -94,7 +94,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                     size_t semi = concurrent.find(";");
                     size_t per = concurrent.find(".");
                     size_t idx = ccurr_up;
-                    string concurrent = des.GetSubstrs(ccurr_up, (semi != -1) ? semi : per);
+                    string concurrent = des.substr(ccurr_up, (semi != -1) ? semi : per);
                     if (!helper(concurrent, idx).empty())
                         prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), true));
                 }
