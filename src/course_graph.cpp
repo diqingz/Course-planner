@@ -99,6 +99,7 @@ map<string, map<vector<string>,bool>> readCourseFile(string filename) {
                         prereq.push_back(make_pair<vector<string>,bool>(helper(des, i), true));
                 }
             }
+            out.push_back(make_pair<string, map<vector<string>,bool>>(name, prereq));
         }
     }
 
